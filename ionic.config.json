@@ -3,5 +3,13 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "context": "/api",
+      "target": "http://joelrogger1-001-site1.htempurl.com/Facturador",
+      "changeOrigin": true,
+      "secure": false
+    }
+  ]
 }

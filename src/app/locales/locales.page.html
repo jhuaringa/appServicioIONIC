@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <!-- Mostrar lista de locales cuando el formulario está oculto -->
+  <div *ngIf="!mostrarFormulario">
+    <!-- Botón más pequeño para registrar nuevo local -->
+    <div class="botones">
+      <ion-button size="small" color="primary" (click)="registrarEditarLocal(null)">
+        + Nuevo Local
+      </ion-button>
+    </div>
+    <ion-list [inset]="true">
+      <ion-item *ngFor="let local of locales">
+        <ion-label>
+          <h2>{{ local.Nombre }}</h2>
+          <p>Dirección: {{ local.Direccion }}</p>
+          <p>Teléfono: {{ local.Telefono }}</p>
+          <p>Horario: {{ local.HoraInicio }} - {{ local.HoraFin }}</p>
+        </ion-label>
+        <ion-button slot="end" color="success" (click)="registrarEditarLocal(local)">
+          Editar
+        </ion-button>
+        <ion-button slot="end" color="danger" (click)="eliminarLocal(local)">
+          Eliminar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Mostrar formulario de registro/edición cuando está activado -->
+  <div *ngIf="mostrarFormulario">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.Direccion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.Telefono"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Hora de Inicio</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.HoraInicio" type="time"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Hora de Fin</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.HoraFin" type="time"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Ubicación</ion-label>
+      <ion-input [(ngModel)]="localSeleccionado.Ubicacion"></ion-input>
+      <ion-button expand="block" (click)="openMapModal()">Seleccionar en el Mapa</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="localSeleccionado.Descripcion"></ion-textarea>
+    </ion-item>
+
+    <!-- Botones "Guardar" y "Cancelar" en una sola fila -->
+    <div class="botones">
+      <ion-button color="primary" (click)="guardarLocal()">
+        Guardar
+      </ion-button>
+      <ion-button color="light" (click)="cancelar()">
+        Cancelar
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

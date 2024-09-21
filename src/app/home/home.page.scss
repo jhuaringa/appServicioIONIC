@@ -25,3 +25,10 @@
 #container a {
   text-decoration: none;
 }
+ion-menu {
+  --width: 300px;
+}
+
+ion-list ion-item {
+  font-size: 16px;
+}

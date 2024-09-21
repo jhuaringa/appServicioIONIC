@@ -1,26 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { MenuService } from '../menu.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
-  nombreUsuario: string = '';
-  constructor(  private router: Router 
-  ) {}
+export class HomePage implements OnInit {
+  public appPages: { title: string, url: string }[] = [];
+
+  constructor(private menuService: MenuService) {}
+
   ngOnInit() {
-     // Recupera el nombre del usuario desde localStorage
-     this.nombreUsuario = localStorage.getItem('nombreUsuario') || '';
-  }
-   // Función para cerrar sesión
-  logout() {
-    localStorage.clear(); // Limpia el localStorage
-    this.router.navigate(['/login']); // Redirige al login
-  }
-  navigateTo(opcion: string) {
-    this.router.navigate([`/${opcion}`]);
+    console.log("entroo")
+    this.appPages = this.menuService.getMenuOptions();
+    console.log("entroo")
   }
 }
